@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+The app file that runs
+the app handles other functions
+"""
 from api.v1.views import app_views
 from flask import Flask
 from models import storage

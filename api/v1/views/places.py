@@ -36,7 +36,7 @@ def place(place_id):
 
 @app_views.route('/places/<string:place_id>', methods=['DELETE'],
                  strict_slashes=False)
-def delete(place_id):
+def delete_place(place_id):
     """deletes a place"""
     place = s.get("Place", place_id)
     if place is None:

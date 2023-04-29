@@ -3,21 +3,22 @@
 Contains the TestFileStorageDocs classes
 """
 
-from datetime import datetime
 import inspect
+import json
 import models
-from models.engine import file_storage
+import os
+import pep8
+import unittest
+from datetime import datetime
 from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.city import City
+from models.engine import file_storage
 from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-import json
-import os
-import pep8
-import unittest
+
 FileStorage = file_storage.FileStorage
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
@@ -126,6 +127,7 @@ class TestFileStorage(unittest.TestCase):
 
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
     def test_count(self):
+        """tests the function - count - """
         storage = FileStorage()
         initial_length = len(storage.all())
         self.assertEqual(storage.count(), initial_length)

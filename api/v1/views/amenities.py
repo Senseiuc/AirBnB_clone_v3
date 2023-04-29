@@ -28,7 +28,7 @@ def amenity(amenity_id):
 
 @app_views.route('/amenities/<string:amenity_id>', methods=['DELETE'],
                  strict_slashes=False)
-def delete(amenity_id):
+def delete_amenity(amenity_id):
     """deletes an amenity"""
     amenity = s.get("Amenity", amenity_id)
     if amenity is None:

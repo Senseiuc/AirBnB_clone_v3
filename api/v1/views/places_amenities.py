@@ -11,7 +11,7 @@ from models.place import Place
 
 
 @app_views.route('/places/<place_id>/amenities', strict_slashes=False)
-def get_amenities(place_id):
+def get_place_amenities(place_id):
     """get all amenities in a place"""
     if models.storage_t == 'db':
         place = storage.get(Place, place_id)
@@ -28,7 +28,7 @@ def get_amenities(place_id):
 
 @app_views.route('/places/<place_id>/amenities/<amenity_id>',
                  strict_slashes=False)
-def get_amenity(place_id, amenity_id):
+def get_place_amenity(place_id, amenity_id):
     """get an amenity"""
     if models.storage_t == 'db':
         place = storage.get(Place, place_id)
@@ -47,7 +47,7 @@ def get_amenity(place_id, amenity_id):
 
 @app_views.route('/places/<place_id>/amenities/<amenity_id>',
                  methods=['DELETE'], strict_slashes=False)
-def delete_amenity(place_id, amenity_id):
+def delete_place_amenity(place_id, amenity_id):
     """delete an amenity"""
     place = storage.get(Place, place_id)
     if place is None:
@@ -61,7 +61,7 @@ def delete_amenity(place_id, amenity_id):
 
 @app_views.route('/places/<place_id>/amenities/<amenity_id>',
                  methods=['POST'], strict_slashes=False)
-def create_amenity(place_id, amenity_id):
+def create_place_amenity(place_id, amenity_id):
     """create an amenity"""
     place = storage.get(Place, place_id)
     if place is None:

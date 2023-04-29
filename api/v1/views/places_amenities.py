@@ -4,7 +4,7 @@ Handle all amenity requests
 """
 import models
 from api.v1.views import app_views
-from flask import jsonify, abort, request
+from flask import abort, jsonify, request, make_response
 from models import storage
 from models.amenity import Amenity
 from models.place import Place
@@ -56,7 +56,7 @@ def delete_place_amenity(place_id, amenity_id):
         if amenity.id == amenity_id:
             amenity.delete()
             storage.save()
-            return jsonify({}), 200
+            return make_response(jsonify({}), 200)
 
 
 @app_views.route('/places/<place_id>/amenities/<amenity_id>',
@@ -73,4 +73,4 @@ def create_place_amenity(place_id, amenity_id):
     amenity = Amenity(**request.get_json())
     amenity.place_id = place_id
     amenity.save()
-    return jsonify(amenity.to_dict()), 201
+    return make_response(jsonify(amenity.to_dict()), 201)

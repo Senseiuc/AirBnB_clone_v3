@@ -3,7 +3,7 @@
 Handle all review requests
 """
 from api.v1.views import app_views
-from flask import Flask, jsonify, abort, request
+from flask import abort, jsonify, request, make_response
 from models import storage
 from models.place import Place
 from models.review import Review
@@ -56,7 +56,7 @@ def create_review(place_id):
     review = Review(**request.get_json())
     review.place_id = place_id
     review.save()
-    return jsonify(review.to_dict()), 201
+    return make_response(jsonify(review.to_dict()), 201)
 
 
 @app_views.route('/reviews/<review_id>', methods=['PUT'],

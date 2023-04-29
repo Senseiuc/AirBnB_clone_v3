@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """handle all the states request"""
 from api.v1.views import app_views
-from flask import jsonify, abort, make_response, request
+from flask import abort, jsonify, make_response, request
 from models import storage as s
 from models.state import State
 

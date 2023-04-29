@@ -3,7 +3,7 @@
 Handle all cities requests
 """
 from api.v1.views import app_views
-from flask import jsonify, abort, request
+from flask import jsonify, abort, request, make_response
 from models import storage
 from models.city import City
 from models.state import State
@@ -53,7 +53,7 @@ def create_city(state_id):
     city = City(**request.get_json())
     city.state_id = state_id
     city.save()
-    return jsonify(city.to_dict()), 201
+    return make_response(jsonify(city.to_dict()), 201)
 
 
 @app_views.route('/cities/<city_id>', methods=['PUT'], strict_slashes=False)
@@ -68,4 +68,4 @@ def update_city(city_id):
         if key not in ['id', 'created_at', 'updated_at']:
             setattr(city, key, value)
     city.save()
-    return jsonify(city.to_dict()), 200
+    return make_response(jsonify(city.to_dict()), 200)

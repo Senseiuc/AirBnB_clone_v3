@@ -1,7 +1,11 @@
-from models.user import User
-from models import storage
+#!/usr/bin/python3
+"""
+handle users requests
+"""
 from api.v1.views import app_views
-from flask import jsonify, abort, request
+from flask import abort, jsonify, make_response, request
+from models import storage
+from models.user import User
 
 
 @app_views.route('/users', strict_slashes=False)
@@ -42,7 +46,7 @@ def create_user():
         abort(400, 'Missing password')
     user = User(**request.get_json())
     user.save()
-    return jsonify(user.to_dict()), 201
+    return make_response(jsonify(user.to_dict()), 201)
 
 
 @app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)

@@ -1,8 +1,12 @@
+#!/usr/bin/python3
+"""
+Handle all cities requests
+"""
+from api.v1.views import app_views
+from flask import jsonify, abort, request
 from models import storage
 from models.city import City
 from models.state import State
-from api.v1.views import app_views
-from flask import jsonify, abort, request
 
 
 @app_views.route('/states/<state_id>/cities', strict_slashes=False)
@@ -64,5 +68,3 @@ def update_city(city_id):
             setattr(city, key, value)
     city.save()
     return jsonify(city.to_dict()), 200
-
-

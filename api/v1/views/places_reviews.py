@@ -1,8 +1,12 @@
-from models import storage
-from models.review import Review
-from models.place import Place
-from flask import Flask, jsonify, abort, request
+#!/usr/bin/python3
+"""
+Handle all review requests
+"""
 from api.v1.views import app_views
+from flask import Flask, jsonify, abort, request
+from models import storage
+from models.place import Place
+from models.review import Review
 
 
 @app_views.route('/places/<place_id>/reviews', strict_slashes=False)
@@ -66,4 +70,3 @@ def update_review(review_id):
             setattr(review, key, value)
     review.save()
     return jsonify(review.to_dict())
-

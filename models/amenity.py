@@ -21,4 +21,5 @@ class Amenity(BaseModel, Base):
         super().__init__(*args, **kwargs)
 
     def to_dict(self):
+        """transform to dict"""
         return super().to_dict()

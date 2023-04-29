@@ -1,5 +1,9 @@
-from api.v1.views import app_views
+#!/usr/bin/python3
+"""
+Handle all amenity requests
+"""
 import models
+from api.v1.views import app_views
 from flask import jsonify, abort, request
 from models import storage
 from models.amenity import Amenity
@@ -67,5 +71,3 @@ def create_amenity(place_id, amenity_id):
     amenity.place_id = place_id
     amenity.save()
     return jsonify(amenity.to_dict()), 201
-
-

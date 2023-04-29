@@ -9,7 +9,7 @@ from models.base_model import BaseModel
 from models.city import City
 from models.place import Place
 from models.review import Review
-from models.state import State 
+from models.state import State
 from models.user import User
 
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
@@ -33,9 +33,10 @@ class FileStorage:
                     new_dict[key] = value
             return new_dict
         return self.__objects
-    
+
     def get(self, cls, id):
-        """returns the object based on the class name and its ID, or None if not found"""
+        """returns the object based on the class\
+                name and its ID, or None if not found"""
         if cls is not None and id is not None:
             key = cls.__name__ + "." + id
             return self.__objects.get(key, None)
@@ -62,7 +63,7 @@ class FileStorage:
                 jo = json.load(f)
             for key in jo:
                 self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
-        except:
+        except Exception:
             pass
 
     def delete(self, obj=None):

@@ -26,12 +26,12 @@ class User(BaseModel, Base):
         last_name = ""
 
     @property
-    def password(self):
+    def password_hash(self):
         """get password"""
         return self._password
 
-    @password.setter
-    def password(self, passwd):
+    @password_hash.setter
+    def set_password(self, passwd):
         """hash password"""
         self._password = hashlib.md5(passwd.encode()).hexdigest()
 

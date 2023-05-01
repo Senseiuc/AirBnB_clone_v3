@@ -19,6 +19,13 @@ class City(BaseModel, Base):
         state_id = ""
         name = ""
 
+    def to_dict(self):
+        """returns a dictionary representation of the instance"""
+        new_dict = super().to_dict()
+        if models.storage_t != "db":
+            del new_dict["places"]
+        return new_dict
+
     def __init__(self, *args, **kwargs):
         """initializes city"""
         super().__init__(*args, **kwargs)

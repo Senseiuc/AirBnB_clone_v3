@@ -1,11 +1,8 @@
 #!/usr/bin/python
 """ holds class Amenity"""
 import models
-import sqlalchemy
 from models.base_model import BaseModel, Base
-from os import getenv
 from sqlalchemy import Column, String
-from sqlalchemy.orm import relationship
 
 
 class Amenity(BaseModel, Base):
@@ -19,7 +16,3 @@ class Amenity(BaseModel, Base):
     def __init__(self, *args, **kwargs):
         """initializes Amenity"""
         super().__init__(*args, **kwargs)
-    
-
-    def to_dict(self):
-        return super().to_dict()

@@ -121,7 +121,7 @@ class TestFileStorage(unittest.TestCase):
         storage = FileStorage()
         self.assertIs(storage.get("User", "unavailabe"), None)
         self.assertIs(storage.get("none", "none"), None)
-        new_user = User(name='john')
+        new_user = User(first_name='john')
         new_user.save()
         self.assertIs(storage.get("User", new_user.id), new_user)
 

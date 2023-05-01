@@ -1,3 +1,7 @@
+""" Places_reviews module"""
+
+#!/usr/bin/python3
+
 from models import storage
 from models.review import Review
 from models.place import Place

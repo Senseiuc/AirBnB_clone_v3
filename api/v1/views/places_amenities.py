@@ -1,3 +1,7 @@
+"""places_amenities module"""
+
+#!/usr/bin/python3
+
 from api.v1.views import app_views
 import models
 from flask import jsonify, abort, request

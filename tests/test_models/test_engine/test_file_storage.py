@@ -119,11 +119,11 @@ class TestFileStorage(unittest.TestCase):
     def test_get(self):
         """Test that the get function retieves an object"""
         storage = FileStorage()
-        self.assertIs(storage.get("User", "unavailabe"), None)
-        self.assertIs(storage.get("none", "none"), None)
+        self.assertIs(storage.get(User, "unavailabe"), None)
+        self.assertIs(storage.get(User, "none"), None)
         new_user = User(first_name='john')
         new_user.save()
-        self.assertIs(storage.get("User", new_user.id), new_user)
+        self.assertIs(storage.get(User, new_user.id), new_user)
 
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
     def test_count(self):

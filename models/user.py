@@ -25,6 +25,13 @@ class User(BaseModel, Base):
         first_name = ""
         last_name = ""
 
+    def to_dict(self, save_pass=False):
+        """returns a dictionary representation of the instance"""
+        new_dict = super().to_dict()
+        if not save_pass:
+            del new_dict['_password']
+        return new_dict
+
     @property
     def password_hash(self):
         """get password"""

@@ -13,6 +13,11 @@ class Amenity(BaseModel, Base):
     else:
         name = ""
 
+    def to_dict(self):
+        """returns a dictionary representation of the instance"""
+        new_dict = super().to_dict()
+        return new_dict
+
     def __init__(self, *args, **kwargs):
         """initializes Amenity"""
         super().__init__(*args, **kwargs)

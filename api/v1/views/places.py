@@ -42,7 +42,7 @@ def delete_place(place_id):
     if place is None:
         abort(404)
     place.delete()
-    storage.save()
+    s.save()
     return (jsonify({}))
 
 
@@ -58,7 +58,7 @@ def create_place(city_id):
     dict = request.get_json()
     if 'user_id' not in dict:
         return make_response(jsonify({'error': 'Missing user_id'}), 400)
-    user = storage.get("User", dict['user_id'])
+    user = s.get("User", dict['user_id'])
     if user is None:
         abort(404)
     if 'name' not in dict:

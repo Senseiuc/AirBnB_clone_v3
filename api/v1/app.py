@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """
 The app file that runs
-the app handles other functions
+and handles other functions
 """
 from api.v1.views import app_views
-from flask import Flask
+from flask import Flask, Blueprint, jsonify, make_response
 from flask_cors import CORS
 from models import storage
 from os import getenv
@@ -19,6 +19,12 @@ cors = CORS(app, resources={"/*": {"origins": "0.0.0.0"}})
 def teardown_appcontext(exception):
     """close storage"""
     storage.close()
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    """404 error"""
+    return make_response({"error": "Not found"}, 404)
 
 
 if __name__ == "__main__":

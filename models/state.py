@@ -18,6 +18,19 @@ class State(BaseModel, Base):
     else:
         name = ""
 
+    def to_dict(self):
+        """returns a dictionary representation of the instance"""
+        dict = {}
+        for key, value in self.__dict__.items():
+            if key == "_sa_instance_state":
+                continue
+            if key == "created_at" or key == "updated_at":
+                dict[key] = value.isoformat()
+            else:
+                dict[key] = value
+        dict["__class__"] = self.__class__.__name__
+        return dict
+
     def __init__(self, *args, **kwargs):
         """initializes state"""
         super().__init__(*args, **kwargs)

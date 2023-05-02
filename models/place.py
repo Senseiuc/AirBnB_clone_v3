@@ -1,9 +1,7 @@
 #!/usr/bin/python
 """ holds class Place"""
 import models
-import sqlalchemy
 from models.base_model import BaseModel, Base
-from os import getenv
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
 from sqlalchemy.orm import relationship
 
@@ -50,6 +48,19 @@ class Place(BaseModel, Base):
         latitude = 0.0
         longitude = 0.0
         amenity_ids = []
+
+    def to_dict(self):
+        """returns a dictionary representation of the instance"""
+        new_dict = super().to_dict()
+        if models.storage_t == 'db':
+            if 'amenities' in new_dict:
+                del new_dict['amenities']
+            if 'reviews' in new_dict:
+                del new_dict['reviews']
+        else:
+            if 'amenity_ids' in new_dict:
+                del new_dict['amenity_ids']
+        return new_dict
 
     def __init__(self, *args, **kwargs):
         """initializes Place"""

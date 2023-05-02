@@ -79,11 +79,11 @@ class TestUser(unittest.TestCase):
     def test_password_attr(self):
         """Test that User has attr password, and it's an empty string"""
         user = User()
-        self.assertTrue(hasattr(user, "password"))
+        self.assertTrue(hasattr(user, "_password"))
         if models.storage_t == 'db':
-            self.assertEqual(user.password, None)
+            self.assertEqual(user._password, None)
         else:
-            self.assertEqual(user.password, "")
+            self.assertEqual(user._password, "")
 
     def test_first_name_attr(self):
         """Test that User has attr first_name, and it's an empty string"""

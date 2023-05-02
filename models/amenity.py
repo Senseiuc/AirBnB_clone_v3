@@ -1,11 +1,8 @@
 #!/usr/bin/python
 """ holds class Amenity"""
 import models
-import sqlalchemy
 from models.base_model import BaseModel, Base
-from os import getenv
 from sqlalchemy import Column, String
-from sqlalchemy.orm import relationship
 
 
 class Amenity(BaseModel, Base):
@@ -15,6 +12,11 @@ class Amenity(BaseModel, Base):
         name = Column(String(128), nullable=False)
     else:
         name = ""
+
+    def to_dict(self):
+        """returns a dictionary representation of the instance"""
+        new_dict = super().to_dict()
+        return new_dict
 
     def __init__(self, *args, **kwargs):
         """initializes Amenity"""

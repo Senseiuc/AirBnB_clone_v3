@@ -51,9 +51,19 @@ if __name__ == "__main__":
     if place_id is None:
         print("Place without amenities not found")
     
-    amenity_id = "nop"
+    """ get amenity
+    """
+    r = requests.get("http://0.0.0.0:5050/api/v1/places/{}/amenities".format(place_id))
+    r_j = r.json()
+    amenity_id = r_j[0].get('id')
 
     """ POST /api/v1/places/<place_id>/amenities/<amenity_id>
     """
     r = requests.post("http://0.0.0.0:5050/api/v1/places/{}/amenities/{}".format(place_id, amenity_id))
     print(r.status_code)
+
+    r = requests.get("http://0.0.0.0:5050/api/v1/places/{}/amenities".format(place_id))
+    r_j = r.json()
+    for amenity_j in r_j:
+        if amenity_j.get('id') == amenity_id:
+            print("OK")

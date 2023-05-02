@@ -56,10 +56,14 @@ def update_user(user_id):
     user = storage.get(User, user_id)
     if user is None:
         abort(404)
-    if not request.json:
+    data = request.get_json()
+    if not data:
         abort(400, 'Not a JSON')
-    for key, value in request.json.items():
+    for key, value in data.items():
         if key not in ['id', 'email', 'created_at', 'updated_at']:
             setattr(user, key, value)
+        else:
+            abort(400, 'Can\'t update')
     user.save()
     return jsonify(user.to_dict()), 200
+

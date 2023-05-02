@@ -11,8 +11,11 @@ from models.user import User
 @app_views.route('/users', strict_slashes=False)
 def get_users():
     """get all users"""
-    users = storage.all(User).values()
-    return jsonify(users.to_dict())
+    all_users = []
+    users = storage.all("User").values()
+    for user in users:
+        all_users.append(user)
+    return jsonify(all_users)
 
 
 @app_views.route('/users/<user_id>', strict_slashes=False)
@@ -21,7 +24,7 @@ def get_user(user_id):
     user = storage.get(User, user_id)
     if user is None:
         abort(404)
-    return jsonify(user.to_dict())
+    return jsonify(user)
 
 
 @app_views.route('/users/<user_id>', methods=['DELETE'], strict_slashes=False)
@@ -61,4 +64,4 @@ def update_user(user_id):
         if key not in ['id', 'email', 'created_at', 'updated_at']:
             setattr(user, key, value)
     user.save()
-    return jsonify(user.to_dict())
+    return jsonify(user), 200

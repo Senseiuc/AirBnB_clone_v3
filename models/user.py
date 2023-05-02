@@ -17,8 +17,10 @@ class User(BaseModel, Base):
         _password = Column('password', String(128), nullable=False)
         first_name = Column(String(128), nullable=True)
         last_name = Column(String(128), nullable=True)
-        places = relationship("Place", backref="user")
-        reviews = relationship("Review", backref="user")
+        places = relationship("Place", backref="user",
+                              cascade="all, delete-orphan")
+        reviews = relationship("Review", backref="user",
+                               cascade="all, delete-orphan")
     else:
         email = ""
         _password = ""
@@ -45,12 +47,12 @@ class User(BaseModel, Base):
 
 
     @property
-    def password_hash(self):
+    def password(self):
         """get password"""
         return self._password
 
-    @password_hash.setter
-    def set_password(self, passwd):
+    @password.setter
+    def password(self, passwd):
         """hash password"""
         self._password = hashlib.md5(passwd.encode()).hexdigest()
 

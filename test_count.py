@@ -34,17 +34,26 @@ if __name__ == "__main__":
             break
     
     if city_id is None:
-        print("City without places not found")
-    
-    """ get place 
+        print("City with places not found")
+
+    """ get place
     """
     r = requests.get("http://0.0.0.0:5050/api/v1/cities/{}/places".format(city_id))
     r_j = r.json()
-    place_id = r_j[0].get('id')
+    place_id = None
+    for place_j in r_j:
+        rp = requests.get("http://0.0.0.0:5050/api/v1/places/{}/amenities".format(place_j.get('id')))
+        rp_j = rp.json()
+        if len(rp_j) != 0:
+            place_id = place_j.get('id')
+            break
     
-    user_id = "nop"
+    if place_id is None:
+        print("Place without amenities not found")
     
-    """ POST /api/v1/places/<place_id>/reviews
+    amenity_id = "nop"
+
+    """ POST /api/v1/places/<place_id>/amenities/<amenity_id>
     """
-    r = requests.post("http://0.0.0.0:5050/api/v1/places/{}/reviews/".format(place_id), data=json.dumps({ 'user_id': user_id, 'text': "NewReview" }), headers={ 'Content-Type': "application/json" })
+    r = requests.post("http://0.0.0.0:5050/api/v1/places/{}/amenities/{}".format(place_id, amenity_id))
     print(r.status_code)

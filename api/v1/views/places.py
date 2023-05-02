@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-handles the places requests
-"""
+"""handles the places requests"""
 
 from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request

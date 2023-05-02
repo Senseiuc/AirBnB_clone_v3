@@ -27,10 +27,18 @@ class User(BaseModel, Base):
 
     def to_dict(self, save_pass=False):
         """returns a dictionary representation of the instance"""
-        new_dict = super().to_dict()
-        if not save_pass:
-            del new_dict['_password']
-        return new_dict
+        dict = {}
+        for key, value in self.__dict__.items():
+            if key == "_sa_instance_state":
+                continue
+            if key == "created_at" or key == "updated_at":
+                dict[key] = value.isoformat()
+            elif key == "_password" and save_pass is False:
+                continue
+            else:
+                dict[key] = value
+        dict["__class__"] = self.__class__.__name__
+        return dict
 
     @property
     def password_hash(self):

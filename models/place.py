@@ -49,7 +49,6 @@ class Place(BaseModel, Base):
         longitude = 0.0
         amenity_ids = []
 
-
     def to_dict(self):
         """returns a dictionary representation of the instance"""
         new_dict = super().to_dict()
@@ -62,6 +61,7 @@ class Place(BaseModel, Base):
             if 'amenity_ids' in new_dict:
                 del new_dict['amenity_ids']
         return new_dict
+
     def __init__(self, *args, **kwargs):
         """initializes Place"""
         super().__init__(*args, **kwargs)
@@ -73,6 +73,7 @@ class Place(BaseModel, Base):
             from models.review import Review
             review_list = []
             all_reviews = models.storage.all(Review)
+
             for review in all_reviews.values():
                 if review.place_id == self.id:
                     review_list.append(review)

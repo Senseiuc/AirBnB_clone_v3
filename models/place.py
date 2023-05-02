@@ -73,6 +73,7 @@ class Place(BaseModel, Base):
             from models.review import Review
             review_list = []
             all_reviews = models.storage.all(Review)
+
             for review in all_reviews.values():
                 if review.place_id == self.id:
                     review_list.append(review)

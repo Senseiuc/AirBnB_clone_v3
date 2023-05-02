@@ -8,6 +8,7 @@ from flask import abort, jsonify, make_response, request
 from models import storage as s
 from models.place import Place
 
+
 @app_views.route('/cities/<string:city_id>/places', methods=['GET'],
                  strict_slashes=False)
 def places(city_id):

@@ -24,7 +24,7 @@ def teardown_appcontext(exception):
 @app.errorhandler(404)
 def page_not_found(e):
     """404 error"""
-    return make_reponse({"error": "Not found"}, 404)
+    return make_response({"error": "Not found"}, 404)
 
 
 if __name__ == "__main__":

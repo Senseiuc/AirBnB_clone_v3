@@ -4,7 +4,7 @@ The app file that runs
 and handles other functions
 """
 from api.v1.views import app_views
-from flask import Flask, make_response
+from flask import Flask, Blueprint, jsonify, make_response
 from flask_cors import CORS
 from models import storage
 from os import getenv
@@ -24,7 +24,7 @@ def teardown_appcontext(exception):
 @app.errorhandler(404)
 def page_not_found(e):
     """404 error"""
-    return make_response({"error": "Not found"}, 404)
+    return make_reponse({"error": "Not found"}, 404)
 
 
 if __name__ == "__main__":
